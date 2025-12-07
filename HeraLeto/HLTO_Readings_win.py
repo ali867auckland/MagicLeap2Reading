@@ -16,13 +16,13 @@ def notification_handler(char_uuid: str):
         Handles incoming notifications from the BLE device.
         """
         # time with milliseconds, but human-readable
-        ts = datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")[:-3]  # trim to ms
+        time = datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")[:-3]  # trim to ms
 
         # two views of the same bytes
         int_view = list(data)
         hex_view = data.hex()
 
-        print(f"\n[{ts}] {char_uuid}")
+        print(f"\n[{time}] {char_uuid}")
         print(f"  ints: {int_view}")
         print(f"  hex : {hex_view}")
     return handler
