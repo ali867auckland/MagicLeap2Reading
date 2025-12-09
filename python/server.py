@@ -3,9 +3,9 @@ import struct # For packing and unpacking binary data
 from pathlib import Path
 from turtle import write # For file Paths
 
-HOST = "" # 
+HOST = "172.24.43.233" 
 PORT = 5000
-
+ 
 ###
 # Header format:
 # "!": Network byte order (big-endian)

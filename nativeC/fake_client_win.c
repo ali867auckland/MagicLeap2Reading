@@ -16,20 +16,9 @@
 // Configuration
 // ---------------------------------------------
 #define SERVER_IP   "127.0.0.1"  // change later if server runs on another machine
-#define SERVER_PORT 50000        // must match Python server PORT
+#define SERVER_PORT 5000         // must match Python server PORT
 #define NUM_PACKETS 100          // how many IMU samples to send
 #define SAMPLE_INTERVAL_MS 50    // time between samples (~20 Hz)
-
-// ---------------------------------------------
-// Helper: 64-bit host-to-network (big-endian)
-// ---------------------------------------------
-static uint64_t htonll(uint64_t x) {
-    uint32_t hi = (uint32_t)(x >> 32);
-    uint32_t lo = (uint32_t)(x & 0xFFFFFFFFULL);
-    hi = htonl(hi);
-    lo = htonl(lo);
-    return ((uint64_t)lo << 32) | hi;
-}
 
 // ---------------------------------------------
 // Helper: timestamp in nanoseconds (relative)
