@@ -1,0 +1,1582 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-9164744217114664385
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d6ccd3d0ef0f1d458e69421dccbdae1, type: 3}
+  m_Name: ValveIndexControllerProfile Standalone
+  m_EditorClassIdentifier: 
+  m_enabled: 0
+  nameUi: Valve Index Controller Profile
+  version: 0.0.1
+  featureIdInternal: com.unity.openxr.feature.input.valveindex
+  openxrExtensionStrings: 
+  company: Unity
+  priority: 0
+  required: 0
+--- !u!114 &-9124945913495552286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c6f97c49868492bb3efe751a0d9cd5d, type: 3}
+  m_Name: MagicLeapRenderingExtensionsFeature Android
+  m_EditorClassIdentifier: 
+  m_enabled: 0
+  nameUi: Magic Leap 2 Rendering Extensions
+  version: 1.0.0
+  featureIdInternal: com.magicleap.openxr.feature.rendering_extensions
+  openxrExtensionStrings: 'XR_ML_frame_end_info XR_ML_global_dimmer '
+  company: Magic Leap
+  priority: 0
+  required: 0
+  defaultBlendModeSelection: 2
+  FocusDistance: 0
+  UseProtectedSurface: 0
+  UseVignetteMode: 0
+  GlobalDimmerEnabled: 0
+  GlobalDimmerValue: 0
+--- !u!114 &-9078646795548066297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d60f70bca23d41759964b1dda9e085b0, type: 3}
+  m_Name: MagicLeapReferenceSpacesFeature Android
+  m_EditorClassIdentifier: 
+  m_enabled: 0
+  nameUi: Magic Leap 2 Reference Spaces
+  version: 1.0.0
+  featureIdInternal: com.magicleap.openxr.feature.reference_spaces
+  openxrExtensionStrings: 'XR_MSFT_unbounded_reference_space XR_EXT_local_floor '
+  company: Magic Leap
+  priority: 0
+  required: 0
+--- !u!114 &-8965729737012438100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92ae4f5c3c8c48c281129f06fbf60316, type: 3}
+  m_Name: MagicLeapReprojectionFeature Android
+  m_EditorClassIdentifier: 
+  m_enabled: 0
+  nameUi: Magic Leap 2 Reprojection
+  version: 1.0.0
+  featureIdInternal: com.magicleap.openxr.feature.ml2_reprojection
+  openxrExtensionStrings: XR_MSFT_composition_layer_reprojection
+  company: Magic Leap
+  priority: 0
+  required: 0
+--- !u!114 &-8912640794110960641
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f7fbc139c144e69b4a0b0fb5139683f, type: 3}
+  m_Name: MagicLeapPlanesFeature Standalone
+  m_EditorClassIdentifier: 
+  m_enabled: 0
+  nameUi: Magic Leap 2 Planes Subsystem
+  version: 1.0.0
+  featureIdInternal: com.magicleap.openxr.feature.ml2_planes
+  openxrExtensionStrings: XR_EXT_plane_detection
+  company: Magic Leap
+  priority: -2
+  required: 0
+--- !u!114 &-8166635380669795819
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b7365b139f7aec43b23d26b7a48b5a6, type: 3}
+  m_Name: MetaQuestTouchPlusControllerProfile Standalone
+  m_EditorClassIdentifier: 
+  m_enabled: 0
+  nameUi: Meta Quest Touch Plus Controller Profile
+  version: 0.0.1
+  featureIdInternal: com.unity.openxr.feature.input.metaquestplus
+  openxrExtensionStrings: XR_META_touch_controller_plus
+  company: Unity
+  priority: 0
+  required: 0
+--- !u!114 &-7824775739117217964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c53e7f5c52084141900efe09f71fe0f, type: 3}
+  m_Name: MagicLeapLightEstimationFeature Standalone
+  m_EditorClassIdentifier: 
+  m_enabled: 0
+  nameUi: Magic Leap 2 Light Estimation
+  version: 1.0.0
+  featureIdInternal: com.magicleap.openxr.feature.ml2_lightestimation
+  openxrExtensionStrings: XR_ML_light_estimation
+  company: Magic Leap
+  priority: -1
+  required: 0
+--- !u!114 &-7022087231716621595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5a1f07dc5afe854f9f12a4194aca3fb, type: 3}
+  m_Name: Android
+  m_EditorClassIdentifier: 
+  features:
+  - {fileID: 4504178461322686831}
+  - {fileID: -5015196224021080053}
+  - {fileID: -324238776670404944}
+  - {fileID: 1808172606353748934}
+  - {fileID: 6664536840003343570}
+  - {fileID: -1513529380487795318}
+  - {fileID: 8581864074393096300}
+  - {fileID: -4381608039760358290}
+  - {fileID: 286100292238017701}
+  - {fileID: -9078646795548066297}
+  - {fileID: -9124945913495552286}
+  - {fileID: -8965729737012438100}
+  - {fileID: -1713890369545377567}
+  - {fileID: 2445256834997724388}
+  - {fileID: 7545037197835341891}
+  - {fileID: -5107566319968379674}
+  - {fileID: 7530519946085000692}
+  - {fileID: -5133833759763614512}
+  - {fileID: 2735990407384515806}
+  - {fileID: -4797416636972221586}
+  - {fileID: 997238538855355277}
+  - {fileID: -5000014254413079385}
+  - {fileID: -6115850073172087076}
+  - {fileID: 4710023865397174591}
+  - {fileID: -3986931044353921753}
+  - {fileID: -5989758331381558330}
+  - {fileID: -6657210383893081314}
+  - {fileID: 5572997874664219328}
+  - {fileID: -3799068196301714548}
+  - {fileID: 9099433935997023684}
+  - {fileID: 540393896935250421}
+  - {fileID: 2974133739050904548}
+  - {fileID: -3307429135171812053}
+  - {fileID: 1019509767834993128}
+  - {fileID: 8247769676658349145}
+  m_renderMode: 1
+  m_autoColorSubmissionMode: 1
+  m_colorSubmissionModes:
+    m_List: 00000000
+  m_depthSubmissionMode: 0
+  m_spacewarpMotionVectorTextureFormat: 0
+  m_optimizeBufferDiscards: 0
+  m_symmetricProjection: 0
+--- !u!114 &-6701417482123059364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a24be4b5ebfe5f4d8ed1de9b25cb7aa, type: 3}
+  m_Name: HandCommonPosesInteraction Standalone
+  m_EditorClassIdentifier: 
+  m_enabled: 0
+  nameUi: Hand Interaction Poses
+  version: 0.0.1
+  featureIdInternal: com.unity.openxr.feature.input.handinteractionposes
+  openxrExtensionStrings: XR_EXT_hand_interaction
+  company: Unity
+  priority: 0
+  required: 0
+--- !u!114 &-6657210383893081314
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b213d3e3c7f3109449eb46a4c8ee42f0, type: 3}
+  m_Name: XrPerformanceSettingsFeature Android
+  m_EditorClassIdentifier: 
+  m_enabled: 0
+  nameUi: XR Performance Settings
+  version: 1.0.0
+  featureIdInternal: com.unity.openxr.feature.extension.performance_settings
+  openxrExtensionStrings: XR_EXT_performance_settings
+  company: Unity
+  priority: 0
+  required: 0
+--- !u!114 &-6492274228134004303
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 274c02963f889a64e90bc2e596e21d13, type: 3}
+  m_Name: HTCViveControllerProfile Standalone
+  m_EditorClassIdentifier: 
+  m_enabled: 0
+  nameUi: HTC Vive Controller Profile
+  version: 0.0.1
+  featureIdInternal: com.unity.openxr.feature.input.htcvive
+  openxrExtensionStrings: 
+  company: Unity
+  priority: 0
+  required: 0
+--- !u!114 &-6126173115618280112
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0898445048444aca849c32d97d461dbf, type: 3}
+  m_Name: MagicLeapPixelSensorFeature Standalone
+  m_EditorClassIdentifier: 
+  m_enabled: 0
+  nameUi: Magic Leap 2 Pixel Sensor
+  version: 1.0.0
+  featureIdInternal: com.magicleap.openxr.feature.ml2_pixel_sensor
+  openxrExtensionStrings: XR_ML_pixel_sensor XR_EXT_future
+  company: Magic Leap
+  priority: -2
+  required: 0
+--- !u!114 &-6115850073172087076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ef793c31862a37448e907829482ef80, type: 3}
+  m_Name: OculusQuestFeature Android
+  m_EditorClassIdentifier: 
+  m_enabled: 0
+  nameUi: Oculus Quest Support
+  version: 1.0.0
+  featureIdInternal: com.unity.openxr.feature.oculusquest
+  openxrExtensionStrings: XR_OCULUS_android_initialize_loader
+  company: Unity
+  priority: 0
+  required: 0
+  targetQuest: 1
+  targetQuest2: 1
+--- !u!114 &-5989758331381558330
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 056125dd64c0ed540b40a4af74f7b495, type: 3}
+  m_Name: RuntimeDebuggerOpenXRFeature Android
+  m_EditorClassIdentifier: 
+  m_enabled: 0
+  nameUi: Runtime Debugger
+  version: 1
+  featureIdInternal: com.unity.openxr.features.runtimedebugger
+  openxrExtensionStrings: 
+  company: Unity
+  priority: 0
+  required: 0
+  cacheSize: 1048576
+  perThreadCacheSize: 51200
+--- !u!114 &-5985454754860814234
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8a068fd8a4144443b50d06f6f964824, type: 3}
+  m_Name: MagicLeapControllerProfile Standalone
+  m_EditorClassIdentifier: 
+  m_enabled: 0
+  nameUi: Magic Leap 2 Controller Interaction Profile
+  version: 1.0.0
+  featureIdInternal: com.magicleap.openxr.feature.input.ml2controllerprofile
+  openxrExtensionStrings: XR_ML_ml2_controller_interaction
+  company: Magic Leap
+  priority: 0
+  required: 0
+--- !u!114 &-5364961263785163442
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 056125dd64c0ed540b40a4af74f7b495, type: 3}
+  m_Name: RuntimeDebuggerOpenXRFeature Standalone
+  m_EditorClassIdentifier: 
+  m_enabled: 0
+  nameUi: Runtime Debugger
+  version: 1
+  featureIdInternal: com.unity.openxr.features.runtimedebugger
+  openxrExtensionStrings: 
+  company: Unity
+  priority: 0
+  required: 0
+  cacheSize: 1048576
+  perThreadCacheSize: 51200
+--- !u!114 &-5133833759763614512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f647cc0545697264a9878224faada6d5, type: 3}
+  m_Name: MetaQuestFeature Android
+  m_EditorClassIdentifier: 
+  m_enabled: 0
+  nameUi: Meta Quest Support
+  version: 1.0.0
+  featureIdInternal: com.unity.openxr.feature.metaquest
+  openxrExtensionStrings: XR_OCULUS_android_initialize_loader
+  company: Unity
+  priority: 0
+  required: 0
+  targetDevices:
+  - visibleName: Quest
+    manifestName: quest
+    enabled: 1
+  - visibleName: Quest 2
+    manifestName: quest2
+    enabled: 1
+  - visibleName: Quest Pro
+    manifestName: cambria
+    enabled: 1
+  - visibleName: Quest 3
+    manifestName: eureka
+    enabled: 1
+  - visibleName: Quest 3S
+    manifestName: quest3s
+    enabled: 1
+  forceRemoveInternetPermission: 0
+  symmetricProjection: 0
+  foveatedRenderingApi: 0
+  systemSplashScreen: {fileID: 0}
+  optimizeBufferDiscards: 1
+  lateLatchingMode: 0
+  lateLatchingDebug: 0
+  optimizeMultiviewRenderRegions: 0
+  spacewarpMotionVectorTextureFormat: 0
+--- !u!114 &-5107566319968379674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37d4a9b48c08843ee9943e71ecb47034, type: 3}
+  m_Name: MagicLeapFeature Android
+  m_EditorClassIdentifier: 
+  m_enabled: 0
+  nameUi: Magic Leap 2 Support
+  version: 1.0.0
+  featureIdInternal: com.magicleap.openxr.feature.ml2
+  openxrExtensionStrings: XR_ML_compat XR_KHR_convert_timespec_time XR_EXT_view_configuration_depth_range
+    XR_ML_view_configuration_depth_range_change
+  company: Magic Leap
+  priority: 0
+  required: 0
+  perceptionSnapshots: 0
+  farClipPolicy: 2
+  nearClipPolicy: 1
+--- !u!114 &-5015196224021080053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c5b5af5107e35a43818d5411328bfc3, type: 3}
+  m_Name: DPadInteraction Android
+  m_EditorClassIdentifier: 
+  m_enabled: 0
+  nameUi: D-Pad Binding
+  version: 0.0.1
+  featureIdInternal: com.unity.openxr.feature.input.dpadinteraction
+  openxrExtensionStrings: XR_KHR_binding_modification XR_EXT_dpad_binding
+  company: Unity
+  priority: 0
+  required: 0
+  forceThresholdLeft: 0.5
+  forceThresholdReleaseLeft: 0.4
+  centerRegionLeft: 0.5
+  wedgeAngleLeft: 1.5707964
+  isStickyLeft: 0
+  forceThresholdRight: 0.5
+  forceThresholdReleaseRight: 0.4
+  centerRegionRight: 0.5
+  wedgeAngleRight: 1.5707964
+  isStickyRight: 0
+  extensionStrings:
+  - XR_KHR_binding_modification
+  - XR_EXT_dpad_binding
+--- !u!114 &-5000014254413079385
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7de993716e042c6499d0c18eed3a773c, type: 3}
+  m_Name: MockRuntime Android
+  m_EditorClassIdentifier: 
+  m_enabled: 0
+  nameUi: Mock Runtime
+  version: 0.0.2
+  featureIdInternal: com.unity.openxr.feature.mockruntime
+  openxrExtensionStrings: XR_UNITY_null_gfx XR_UNITY_android_present
+  company: Unity
+  priority: 0
+  required: 0
+  ignoreValidationErrors: 0
+--- !u!114 &-4797416636972221586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4b862ee14fb479fbfe5fffe655d3ed3, type: 3}
+  m_Name: MetaQuestTouchProControllerProfile Android
+  m_EditorClassIdentifier: 
+  m_enabled: 0
+  nameUi: Meta Quest Touch Pro Controller Profile
+  version: 0.0.1
+  featureIdInternal: com.unity.openxr.feature.input.metaquestpro
+  openxrExtensionStrings: XR_FB_touch_controller_pro
+  company: Unity
+  priority: 0
+  required: 0
+--- !u!114 &-4381608039760358290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69b8341c5e7c6406f8d60fd00f034d8b, type: 3}
+  m_Name: MagicLeapLocalizationMapFeature Android
+  m_EditorClassIdentifier: 
+  m_enabled: 0
+  nameUi: Magic Leap 2 Localization Maps
+  version: 1.0.0
+  featureIdInternal: com.magicleap.openxr.feature.ml2_localizationmap
+  openxrExtensionStrings: XR_ML_localization_map
+  company: Magic Leap
+  priority: 0
+  required: 0
+--- !u!114 &-4315962806803632053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 761fdd4502cb7a84e9ec7a2b24f33f37, type: 3}
+  m_Name: MicrosoftMotionControllerProfile Standalone
+  m_EditorClassIdentifier: 
+  m_enabled: 0
+  nameUi: Microsoft Motion Controller Profile
+  version: 0.0.1
+  featureIdInternal: com.unity.openxr.feature.input.microsoftmotioncontroller
+  openxrExtensionStrings: 
+  company: Unity
+  priority: 0
+  required: 0
+--- !u!114 &-4081456859675553452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78dd111ab9872144c9ea2d30e138bec4, type: 3}
+  m_Name: MagicLeapEyeTrackerFeature Standalone
+  m_EditorClassIdentifier: 
+  m_enabled: 0
+  nameUi: Magic Leap 2 Eye Tracker
+  version: 1.0.0
+  featureIdInternal: com.magicleap.openxr.feature.ml2_eyetracker
+  openxrExtensionStrings: XR_ML_eye_tracker
+  company: Magic Leap
+  priority: -1
+  required: 0
+--- !u!114 &-3986931044353921753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f028123e2efe1d443875bc7609b4a98b, type: 3}
+  m_Name: PalmPoseInteraction Android
+  m_EditorClassIdentifier: 
+  m_enabled: 0
+  nameUi: Palm Pose
+  version: 0.0.1
+  featureIdInternal: com.unity.openxr.feature.input.palmpose
+  openxrExtensionStrings: XR_EXT_palm_pose
+  company: Unity
+  priority: 0
+  required: 0
+--- !u!114 &-3799068196301714548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74ecfbe7bc16a2e41a36f3c8e26f111c, type: 3}
+  m_Name: MagicLeapFacialExpressionFeature Android
+  m_EditorClassIdentifier: 
+  m_enabled: 0
+  nameUi: Magic Leap 2 Facial Expression
+  version: 1.0.0
+  featureIdInternal: com.magicleap.openxr.feature.ml2_facialexpression
+  openxrExtensionStrings: XR_ML_facial_expression
+  company: Magic Leap
+  priority: -1
+  required: 0
+--- !u!114 &-3749044649214454851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 486b5e28864f9a94b979b9620ce5006d, type: 3}
+  m_Name: ConformanceAutomationFeature Standalone
+  m_EditorClassIdentifier: 
+  m_enabled: 0
+  nameUi: Conformance Automation
+  version: 0.0.1
+  featureIdInternal: com.unity.openxr.feature.conformance
+  openxrExtensionStrings: XR_EXT_conformance_automation
+  company: Unity
+  priority: 0
+  required: 0
+--- !u!114 &-3307429135171812053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8893c58a68b4ff98668b47e5c935e57, type: 3}
+  m_Name: MagicLeapMeshingFeature Android
+  m_EditorClassIdentifier: 
+  m_enabled: 0
+  nameUi: Magic Leap 2 Meshing Subsystem
+  version: 1.0.0
+  featureIdInternal: com.magicleap.openxr.feature.ml2_mesh_detection
+  openxrExtensionStrings: XR_ML_world_mesh_detection XR_EXT_future
+  company: Magic Leap
+  priority: -2
+  required: 0
+--- !u!114 &-2913972723239944455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69b8341c5e7c6406f8d60fd00f034d8b, type: 3}
+  m_Name: MagicLeapLocalizationMapFeature Standalone
+  m_EditorClassIdentifier: 
+  m_enabled: 0
+  nameUi: Magic Leap 2 Localization Maps
+  version: 1.0.0
+  featureIdInternal: com.magicleap.openxr.feature.ml2_localizationmap
+  openxrExtensionStrings: XR_ML_localization_map
+  company: Magic Leap
+  priority: 0
+  required: 0
+--- !u!114 &-1713890369545377567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a4de40d3cf194482a47ad56ec612e9a, type: 3}
+  m_Name: MagicLeapSecondaryViewSupportFeature Android
+  m_EditorClassIdentifier: 
+  m_enabled: 0
+  nameUi: Magic Leap 2 Secondary View
+  version: 1.0.0
+  featureIdInternal: com.magicleap.openxr.feature.secondary_view_configuration
+  openxrExtensionStrings: XR_MSFT_secondary_view_configuration XR_MSFT_first_person_observer
+  company: Magic Leap
+  priority: 0
+  required: 0
+--- !u!114 &-1513529380487795318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f6bfdbcb316ed242b30a8798c9eb853, type: 3}
+  m_Name: KHRSimpleControllerProfile Android
+  m_EditorClassIdentifier: 
+  m_enabled: 0
+  nameUi: Khronos Simple Controller Profile
+  version: 0.0.1
+  featureIdInternal: com.unity.openxr.feature.input.khrsimpleprofile
+  openxrExtensionStrings: 
+  company: Unity
+  priority: 0
+  required: 0
+--- !u!114 &-609534988942924831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8893c58a68b4ff98668b47e5c935e57, type: 3}
+  m_Name: MagicLeapMeshingFeature Standalone
+  m_EditorClassIdentifier: 
+  m_enabled: 0
+  nameUi: Magic Leap 2 Meshing Subsystem
+  version: 1.0.0
+  featureIdInternal: com.magicleap.openxr.feature.ml2_mesh_detection
+  openxrExtensionStrings: XR_ML_world_mesh_detection XR_EXT_future
+  company: Magic Leap
+  priority: -2
+  required: 0
+--- !u!114 &-324238776670404944
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3cf79659a011bd419c7a2a30eb74e9a, type: 3}
+  m_Name: EyeGazeInteraction Android
+  m_EditorClassIdentifier: 
+  m_enabled: 0
+  nameUi: Eye Gaze Interaction Profile
+  version: 0.0.1
+  featureIdInternal: com.unity.openxr.feature.input.eyetracking
+  openxrExtensionStrings: XR_EXT_eye_gaze_interaction
+  company: Unity
+  priority: 0
+  required: 0
+--- !u!114 &-214965347423250228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b213d3e3c7f3109449eb46a4c8ee42f0, type: 3}
+  m_Name: XrPerformanceSettingsFeature Standalone
+  m_EditorClassIdentifier: 
+  m_enabled: 0
+  nameUi: XR Performance Settings
+  version: 1.0.0
+  featureIdInternal: com.unity.openxr.feature.extension.performance_settings
+  openxrExtensionStrings: XR_EXT_performance_settings
+  company: Unity
+  priority: 0
+  required: 0
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f0ebc320a151d3408ea1e9fce54d40e, type: 3}
+  m_Name: OpenXR Package Settings
+  m_EditorClassIdentifier: 
+  Keys: 0100000007000000
+  Values:
+  - {fileID: 5436763627154896533}
+  - {fileID: -7022087231716621595}
+--- !u!114 &46534407849924005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3cf79659a011bd419c7a2a30eb74e9a, type: 3}
+  m_Name: EyeGazeInteraction Standalone
+  m_EditorClassIdentifier: 
+  m_enabled: 0
+  nameUi: Eye Gaze Interaction Profile
+  version: 0.0.1
+  featureIdInternal: com.unity.openxr.feature.input.eyetracking
+  openxrExtensionStrings: XR_EXT_eye_gaze_interaction
+  company: Unity
+  priority: 0
+  required: 0
+--- !u!114 &286100292238017701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fd2e160e79e4358a71fa4a1592da582, type: 3}
+  m_Name: MagicLeapPhysicalOcclusionFeature Android
+  m_EditorClassIdentifier: 
+  m_enabled: 0
+  nameUi: Magic Leap 2 Physical Occlusion
+  version: 1.0.0
+  featureIdInternal: com.magicleap.openxr.feature.ml2_physical_occlusion
+  openxrExtensionStrings: XR_ML_physical_world_occlusion
+  company: Magic Leap
+  priority: 0
+  required: 0
+--- !u!114 &330391236252026909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92ae4f5c3c8c48c281129f06fbf60316, type: 3}
+  m_Name: MagicLeapReprojectionFeature Standalone
+  m_EditorClassIdentifier: 
+  m_enabled: 0
+  nameUi: Magic Leap 2 Reprojection
+  version: 1.0.0
+  featureIdInternal: com.magicleap.openxr.feature.ml2_reprojection
+  openxrExtensionStrings: XR_MSFT_composition_layer_reprojection
+  company: Magic Leap
+  priority: 0
+  required: 0
+--- !u!114 &540393896935250421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 839b445bcefe86e4c850a6223d8e213f, type: 3}
+  m_Name: MagicLeapMarkerUnderstandingFeature Android
+  m_EditorClassIdentifier: 
+  m_enabled: 0
+  nameUi: Magic Leap 2 Marker Understanding
+  version: 1.0.0
+  featureIdInternal: com.magicleap.openxr.feature.ml2_markerunderstanding
+  openxrExtensionStrings: XR_ML_marker_understanding
+  company: Magic Leap
+  priority: -1
+  required: 0
+--- !u!114 &628801805753969335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5019471fb2174e5c852ecd4047163007, type: 3}
+  m_Name: HandInteractionProfile Standalone
+  m_EditorClassIdentifier: 
+  m_enabled: 0
+  nameUi: Hand Interaction Profile
+  version: 0.0.1
+  featureIdInternal: com.unity.openxr.feature.input.handinteraction
+  openxrExtensionStrings: XR_EXT_hand_interaction
+  company: Unity
+  priority: 0
+  required: 0
+--- !u!114 &997238538855355277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f928d0d73a35f294fbe357ca17aa3547, type: 3}
+  m_Name: MicrosoftHandInteraction Android
+  m_EditorClassIdentifier: 
+  m_enabled: 0
+  nameUi: Microsoft Hand Interaction Profile
+  version: 0.0.1
+  featureIdInternal: com.unity.openxr.feature.input.handtracking
+  openxrExtensionStrings: XR_MSFT_hand_interaction
+  company: Unity
+  priority: 0
+  required: 0
+--- !u!114 &1019509767834993128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0898445048444aca849c32d97d461dbf, type: 3}
+  m_Name: MagicLeapPixelSensorFeature Android
+  m_EditorClassIdentifier: 
+  m_enabled: 0
+  nameUi: Magic Leap 2 Pixel Sensor
+  version: 1.0.0
+  featureIdInternal: com.magicleap.openxr.feature.ml2_pixel_sensor
+  openxrExtensionStrings: XR_ML_pixel_sensor XR_EXT_future
+  company: Magic Leap
+  priority: -2
+  required: 0
+--- !u!114 &1530446876064388751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b263bfa84f8e34d46bc7293680ad3d82, type: 3}
+  m_Name: MagicLeapSpatialAnchorsFeature Standalone
+  m_EditorClassIdentifier: 
+  m_enabled: 0
+  nameUi: Magic Leap 2 Spatial Anchor Subsystem
+  version: 1.0.0
+  featureIdInternal: com.magicleap.openxr.feature.ml2_spatialanchor
+  openxrExtensionStrings: XR_ML_spatial_anchors XR_EXT_future
+  company: Magic Leap
+  priority: 0
+  required: 0
+--- !u!114 &1808172606353748934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a24be4b5ebfe5f4d8ed1de9b25cb7aa, type: 3}
+  m_Name: HandCommonPosesInteraction Android
+  m_EditorClassIdentifier: 
+  m_enabled: 0
+  nameUi: Hand Interaction Poses
+  version: 0.0.1
+  featureIdInternal: com.unity.openxr.feature.input.handinteractionposes
+  openxrExtensionStrings: XR_EXT_hand_interaction
+  company: Unity
+  priority: 0
+  required: 0
+--- !u!114 &1969756255968305208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be4414b393e32144b91a70d63254a4b2, type: 3}
+  m_Name: MagicLeapSpatialAnchorsStorageFeature Standalone
+  m_EditorClassIdentifier: 
+  m_enabled: 0
+  nameUi: Magic Leap 2 Spatial Anchors Storage
+  version: 1.0.0
+  featureIdInternal: com.magicleap.openxr.feature.ml2_spatialanchorstorage
+  openxrExtensionStrings: XR_ML_spatial_anchors_storage XR_EXT_future XR_KHR_locate_spaces
+  company: Magic Leap
+  priority: 0
+  required: 0
+--- !u!114 &2298414081493961667
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 839b445bcefe86e4c850a6223d8e213f, type: 3}
+  m_Name: MagicLeapMarkerUnderstandingFeature Standalone
+  m_EditorClassIdentifier: 
+  m_enabled: 0
+  nameUi: Magic Leap 2 Marker Understanding
+  version: 1.0.0
+  featureIdInternal: com.magicleap.openxr.feature.ml2_markerunderstanding
+  openxrExtensionStrings: XR_ML_marker_understanding
+  company: Magic Leap
+  priority: -1
+  required: 0
+--- !u!114 &2320087772773811272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fd2e160e79e4358a71fa4a1592da582, type: 3}
+  m_Name: MagicLeapPhysicalOcclusionFeature Standalone
+  m_EditorClassIdentifier: 
+  m_enabled: 0
+  nameUi: Magic Leap 2 Physical Occlusion
+  version: 1.0.0
+  featureIdInternal: com.magicleap.openxr.feature.ml2_physical_occlusion
+  openxrExtensionStrings: XR_ML_physical_world_occlusion
+  company: Magic Leap
+  priority: 0
+  required: 0
+--- !u!114 &2409551410567492656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f6bfdbcb316ed242b30a8798c9eb853, type: 3}
+  m_Name: KHRSimpleControllerProfile Standalone
+  m_EditorClassIdentifier: 
+  m_enabled: 0
+  nameUi: Khronos Simple Controller Profile
+  version: 0.0.1
+  featureIdInternal: com.unity.openxr.feature.input.khrsimpleprofile
+  openxrExtensionStrings: 
+  company: Unity
+  priority: 0
+  required: 0
+--- !u!114 &2445256834997724388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b263bfa84f8e34d46bc7293680ad3d82, type: 3}
+  m_Name: MagicLeapSpatialAnchorsFeature Android
+  m_EditorClassIdentifier: 
+  m_enabled: 0
+  nameUi: Magic Leap 2 Spatial Anchor Subsystem
+  version: 1.0.0
+  featureIdInternal: com.magicleap.openxr.feature.ml2_spatialanchor
+  openxrExtensionStrings: XR_ML_spatial_anchors XR_EXT_future
+  company: Magic Leap
+  priority: 0
+  required: 0
+--- !u!114 &2735990407384515806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b7365b139f7aec43b23d26b7a48b5a6, type: 3}
+  m_Name: MetaQuestTouchPlusControllerProfile Android
+  m_EditorClassIdentifier: 
+  m_enabled: 0
+  nameUi: Meta Quest Touch Plus Controller Profile
+  version: 0.0.1
+  featureIdInternal: com.unity.openxr.feature.input.metaquestplus
+  openxrExtensionStrings: XR_META_touch_controller_plus
+  company: Unity
+  priority: 0
+  required: 0
+--- !u!114 &2974133739050904548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab47626d909c75646bf88bfa5ac12421, type: 3}
+  m_Name: MagicLeapUserCalibrationFeature Android
+  m_EditorClassIdentifier: 
+  m_enabled: 0
+  nameUi: Magic Leap 2 User Calibration
+  version: 1.0.0
+  featureIdInternal: com.magicleap.openxr.feature.ml2_usercalibration
+  openxrExtensionStrings: XR_ML_user_calibration
+  company: Magic Leap
+  priority: -1
+  required: 0
+--- !u!114 &3529657892272783337
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37d4a9b48c08843ee9943e71ecb47034, type: 3}
+  m_Name: MagicLeapFeature Standalone
+  m_EditorClassIdentifier: 
+  m_enabled: 0
+  nameUi: Magic Leap 2 Support
+  version: 1.0.0
+  featureIdInternal: com.magicleap.openxr.feature.ml2
+  openxrExtensionStrings: XR_ML_compat XR_KHR_convert_timespec_time XR_EXT_view_configuration_depth_range
+    XR_ML_view_configuration_depth_range_change
+  company: Magic Leap
+  priority: 0
+  required: 0
+  perceptionSnapshots: 0
+  farClipPolicy: 2
+  nearClipPolicy: 1
+--- !u!114 &3712428425413845752
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f928d0d73a35f294fbe357ca17aa3547, type: 3}
+  m_Name: MicrosoftHandInteraction Standalone
+  m_EditorClassIdentifier: 
+  m_enabled: 0
+  nameUi: Microsoft Hand Interaction Profile
+  version: 0.0.1
+  featureIdInternal: com.unity.openxr.feature.input.handtracking
+  openxrExtensionStrings: XR_MSFT_hand_interaction
+  company: Unity
+  priority: 0
+  required: 0
+--- !u!114 &4269308470410313983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f028123e2efe1d443875bc7609b4a98b, type: 3}
+  m_Name: PalmPoseInteraction Standalone
+  m_EditorClassIdentifier: 
+  m_enabled: 0
+  nameUi: Palm Pose
+  version: 0.0.1
+  featureIdInternal: com.unity.openxr.feature.input.palmpose
+  openxrExtensionStrings: XR_EXT_palm_pose
+  company: Unity
+  priority: 0
+  required: 0
+--- !u!114 &4504178461322686831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 486b5e28864f9a94b979b9620ce5006d, type: 3}
+  m_Name: ConformanceAutomationFeature Android
+  m_EditorClassIdentifier: 
+  m_enabled: 0
+  nameUi: Conformance Automation
+  version: 0.0.1
+  featureIdInternal: com.unity.openxr.feature.conformance
+  openxrExtensionStrings: XR_EXT_conformance_automation
+  company: Unity
+  priority: 0
+  required: 0
+--- !u!114 &4710023865397174591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: feeef8d85de8db242bdda70cc7ff5acd, type: 3}
+  m_Name: OculusTouchControllerProfile Android
+  m_EditorClassIdentifier: 
+  m_enabled: 0
+  nameUi: Oculus Touch Controller Profile
+  version: 0.0.1
+  featureIdInternal: com.unity.openxr.feature.input.oculustouch
+  openxrExtensionStrings: 
+  company: Unity
+  priority: 0
+  required: 0
+--- !u!114 &5195256601866845377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a4de40d3cf194482a47ad56ec612e9a, type: 3}
+  m_Name: MagicLeapSecondaryViewSupportFeature Standalone
+  m_EditorClassIdentifier: 
+  m_enabled: 0
+  nameUi: Magic Leap 2 Secondary View
+  version: 1.0.0
+  featureIdInternal: com.magicleap.openxr.feature.secondary_view_configuration
+  openxrExtensionStrings: XR_MSFT_secondary_view_configuration XR_MSFT_first_person_observer
+  company: Magic Leap
+  priority: 0
+  required: 0
+--- !u!114 &5436763627154896533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5a1f07dc5afe854f9f12a4194aca3fb, type: 3}
+  m_Name: Standalone
+  m_EditorClassIdentifier: 
+  features:
+  - {fileID: -3749044649214454851}
+  - {fileID: 5702689320163020192}
+  - {fileID: 46534407849924005}
+  - {fileID: -6701417482123059364}
+  - {fileID: 628801805753969335}
+  - {fileID: 6040470659534373266}
+  - {fileID: -6492274228134004303}
+  - {fileID: 2409551410567492656}
+  - {fileID: -5985454754860814234}
+  - {fileID: -2913972723239944455}
+  - {fileID: 2320087772773811272}
+  - {fileID: 7017690586390942107}
+  - {fileID: 330391236252026909}
+  - {fileID: 5195256601866845377}
+  - {fileID: 1530446876064388751}
+  - {fileID: 1969756255968305208}
+  - {fileID: 3529657892272783337}
+  - {fileID: -8166635380669795819}
+  - {fileID: 8230981793895948541}
+  - {fileID: 3712428425413845752}
+  - {fileID: -4315962806803632053}
+  - {fileID: 6687468391059186543}
+  - {fileID: 7983154983616451931}
+  - {fileID: 4269308470410313983}
+  - {fileID: -5364961263785163442}
+  - {fileID: -9164744217114664385}
+  - {fileID: -214965347423250228}
+  - {fileID: -4081456859675553452}
+  - {fileID: 8741517685095479076}
+  - {fileID: -7824775739117217964}
+  - {fileID: 2298414081493961667}
+  - {fileID: -609534988942924831}
+  - {fileID: -6126173115618280112}
+  - {fileID: -8912640794110960641}
+  m_renderMode: 1
+  m_autoColorSubmissionMode: 1
+  m_colorSubmissionModes:
+    m_List: 00000000
+  m_depthSubmissionMode: 0
+  m_spacewarpMotionVectorTextureFormat: 0
+  m_optimizeBufferDiscards: 0
+  m_symmetricProjection: 0
+--- !u!114 &5572997874664219328
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78dd111ab9872144c9ea2d30e138bec4, type: 3}
+  m_Name: MagicLeapEyeTrackerFeature Android
+  m_EditorClassIdentifier: 
+  m_enabled: 0
+  nameUi: Magic Leap 2 Eye Tracker
+  version: 1.0.0
+  featureIdInternal: com.magicleap.openxr.feature.ml2_eyetracker
+  openxrExtensionStrings: XR_ML_eye_tracker
+  company: Magic Leap
+  priority: -1
+  required: 0
+--- !u!114 &5702689320163020192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c5b5af5107e35a43818d5411328bfc3, type: 3}
+  m_Name: DPadInteraction Standalone
+  m_EditorClassIdentifier: 
+  m_enabled: 0
+  nameUi: D-Pad Binding
+  version: 0.0.1
+  featureIdInternal: com.unity.openxr.feature.input.dpadinteraction
+  openxrExtensionStrings: XR_KHR_binding_modification XR_EXT_dpad_binding
+  company: Unity
+  priority: 0
+  required: 0
+  forceThresholdLeft: 0.5
+  forceThresholdReleaseLeft: 0.4
+  centerRegionLeft: 0.5
+  wedgeAngleLeft: 1.5707964
+  isStickyLeft: 0
+  forceThresholdRight: 0.5
+  forceThresholdReleaseRight: 0.4
+  centerRegionRight: 0.5
+  wedgeAngleRight: 1.5707964
+  isStickyRight: 0
+  extensionStrings:
+  - XR_KHR_binding_modification
+  - XR_EXT_dpad_binding
+--- !u!114 &6040470659534373266
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5315f812f023cf4ebf26f7e5d2d70f2, type: 3}
+  m_Name: HPReverbG2ControllerProfile Standalone
+  m_EditorClassIdentifier: 
+  m_enabled: 0
+  nameUi: HP Reverb G2 Controller Profile
+  version: 0.0.1
+  featureIdInternal: com.unity.openxr.feature.input.hpreverb
+  openxrExtensionStrings: XR_EXT_hp_mixed_reality_controller
+  company: Unity
+  priority: 0
+  required: 0
+--- !u!114 &6664536840003343570
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5019471fb2174e5c852ecd4047163007, type: 3}
+  m_Name: HandInteractionProfile Android
+  m_EditorClassIdentifier: 
+  m_enabled: 0
+  nameUi: Hand Interaction Profile
+  version: 0.0.1
+  featureIdInternal: com.unity.openxr.feature.input.handinteraction
+  openxrExtensionStrings: XR_EXT_hand_interaction
+  company: Unity
+  priority: 0
+  required: 0
+--- !u!114 &6687468391059186543
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7de993716e042c6499d0c18eed3a773c, type: 3}
+  m_Name: MockRuntime Standalone
+  m_EditorClassIdentifier: 
+  m_enabled: 0
+  nameUi: Mock Runtime
+  version: 0.0.2
+  featureIdInternal: com.unity.openxr.feature.mockruntime
+  openxrExtensionStrings: XR_UNITY_null_gfx XR_UNITY_android_present
+  company: Unity
+  priority: 0
+  required: 0
+  ignoreValidationErrors: 0
+--- !u!114 &7017690586390942107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d60f70bca23d41759964b1dda9e085b0, type: 3}
+  m_Name: MagicLeapReferenceSpacesFeature Standalone
+  m_EditorClassIdentifier: 
+  m_enabled: 0
+  nameUi: Magic Leap 2 Reference Spaces
+  version: 1.0.0
+  featureIdInternal: com.magicleap.openxr.feature.reference_spaces
+  openxrExtensionStrings: 'XR_MSFT_unbounded_reference_space XR_EXT_local_floor '
+  company: Magic Leap
+  priority: 0
+  required: 0
+--- !u!114 &7530519946085000692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7107f4296adb0497caaacdeec606c190, type: 3}
+  m_Name: MagicLeapSystemNotificationsFeature Android
+  m_EditorClassIdentifier: 
+  m_enabled: 0
+  nameUi: Magic Leap 2 System Notification Control
+  version: 1.0.0
+  featureIdInternal: com.magicleap.openxr.feature.ml2_systemnotification
+  openxrExtensionStrings: XR_ML_system_notifications
+  company: Magic Leap
+  priority: 0
+  required: 0
+--- !u!114 &7545037197835341891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be4414b393e32144b91a70d63254a4b2, type: 3}
+  m_Name: MagicLeapSpatialAnchorsStorageFeature Android
+  m_EditorClassIdentifier: 
+  m_enabled: 0
+  nameUi: Magic Leap 2 Spatial Anchors Storage
+  version: 1.0.0
+  featureIdInternal: com.magicleap.openxr.feature.ml2_spatialanchorstorage
+  openxrExtensionStrings: XR_ML_spatial_anchors_storage XR_EXT_future XR_KHR_locate_spaces
+  company: Magic Leap
+  priority: 0
+  required: 0
+--- !u!114 &7983154983616451931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: feeef8d85de8db242bdda70cc7ff5acd, type: 3}
+  m_Name: OculusTouchControllerProfile Standalone
+  m_EditorClassIdentifier: 
+  m_enabled: 0
+  nameUi: Oculus Touch Controller Profile
+  version: 0.0.1
+  featureIdInternal: com.unity.openxr.feature.input.oculustouch
+  openxrExtensionStrings: 
+  company: Unity
+  priority: 0
+  required: 0
+--- !u!114 &8230981793895948541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4b862ee14fb479fbfe5fffe655d3ed3, type: 3}
+  m_Name: MetaQuestTouchProControllerProfile Standalone
+  m_EditorClassIdentifier: 
+  m_enabled: 0
+  nameUi: Meta Quest Touch Pro Controller Profile
+  version: 0.0.1
+  featureIdInternal: com.unity.openxr.feature.input.metaquestpro
+  openxrExtensionStrings: XR_FB_touch_controller_pro
+  company: Unity
+  priority: 0
+  required: 0
+--- !u!114 &8247769676658349145
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f7fbc139c144e69b4a0b0fb5139683f, type: 3}
+  m_Name: MagicLeapPlanesFeature Android
+  m_EditorClassIdentifier: 
+  m_enabled: 0
+  nameUi: Magic Leap 2 Planes Subsystem
+  version: 1.0.0
+  featureIdInternal: com.magicleap.openxr.feature.ml2_planes
+  openxrExtensionStrings: XR_EXT_plane_detection
+  company: Magic Leap
+  priority: -2
+  required: 0
+--- !u!114 &8581864074393096300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8a068fd8a4144443b50d06f6f964824, type: 3}
+  m_Name: MagicLeapControllerProfile Android
+  m_EditorClassIdentifier: 
+  m_enabled: 0
+  nameUi: Magic Leap 2 Controller Interaction Profile
+  version: 1.0.0
+  featureIdInternal: com.magicleap.openxr.feature.input.ml2controllerprofile
+  openxrExtensionStrings: XR_ML_ml2_controller_interaction
+  company: Magic Leap
+  priority: 0
+  required: 0
+--- !u!114 &8741517685095479076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74ecfbe7bc16a2e41a36f3c8e26f111c, type: 3}
+  m_Name: MagicLeapFacialExpressionFeature Standalone
+  m_EditorClassIdentifier: 
+  m_enabled: 0
+  nameUi: Magic Leap 2 Facial Expression
+  version: 1.0.0
+  featureIdInternal: com.magicleap.openxr.feature.ml2_facialexpression
+  openxrExtensionStrings: XR_ML_facial_expression
+  company: Magic Leap
+  priority: -1
+  required: 0
+--- !u!114 &9099433935997023684
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c53e7f5c52084141900efe09f71fe0f, type: 3}
+  m_Name: MagicLeapLightEstimationFeature Android
+  m_EditorClassIdentifier: 
+  m_enabled: 0
+  nameUi: Magic Leap 2 Light Estimation
+  version: 1.0.0
+  featureIdInternal: com.magicleap.openxr.feature.ml2_lightestimation
+  openxrExtensionStrings: XR_ML_light_estimation
+  company: Magic Leap
+  priority: -1
+  required: 0
