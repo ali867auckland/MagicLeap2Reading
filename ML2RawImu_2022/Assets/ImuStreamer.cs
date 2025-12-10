@@ -2,59 +2,41 @@ using System;
 using System.Collections;
 using System.Net.Sockets;
 using UnityEngine;
-using UnityEngine.InputSystem;  // NEW: Input System sensors
 
 public class ImuStreamer : MonoBehaviour
 {
     [Header("Network Settings")]
     [Tooltip("IPv4 address of your laptop running server.py")]
-    public string laptopIp = "172.24.43.233";  // set to your laptop's IP
-    public int port = 5000;                   // must match PORT in server.py
+    public string laptopIp = "172.24.43.233";  // TODO: set to your laptop's IP
+    public int port = 50000;                   // must match PORT in server.py
 
     [Header("Sampling")]
-    [Tooltip("Seconds between IMU samples (0.05 = 20 Hz)")]
+    [Tooltip("Seconds between samples (0.05 = 20 Hz)")]
     public float sampleIntervalSeconds = 0.05f;
 
-    [Header("Header Pose")]
-    [Tooltip("Head transform (usually main camera). if empty, Camera.main will be used")]
+    [Header("Head Pose")]
+    [Tooltip("Assign the XR Camera / Head transform here")]
     public Transform headTransform;
 
     private TcpClient _client;
     private NetworkStream _stream;
 
-    private readonly byte[] _imuHeader = new byte[16];     // 16-byte header
-    private readonly byte[] _imuPayload = new byte[9 * 4]; // 9 floats = 36 bytes
+    // Common 16-byte header buffer: !BBHQI  (type, sensor_id, reserved, t_ns, payload_len)
+    private readonly byte[] _header = new byte[16];
 
-    private readonly byte[] _poseHeader = new byte[16];
+    // IMU payload: 9 floats (acc, gyro, mag)
+    private readonly byte[] _imuPayload = new byte[9 * 4];
+
+    // Pose payload: 7 floats (pos XYZ, quat XYZW)
     private readonly byte[] _posePayload = new byte[7 * 4];
 
     private bool _connected = false;
 
-    // NEW: references to Input System sensors
-    private UnityEngine.InputSystem.Gyroscope _gyro;
-    private UnityEngine.InputSystem.Accelerometer _accel;
-
     void Start()
     {
         Application.runInBackground = true; // keep running if display dims
+        Input.gyro.enabled = true;         // enable Unity gyro
 
-        // ---- 1) Get and enable sensors via Input System ----
-        _gyro = UnityEngine.InputSystem.Gyroscope.current;
-        _accel = UnityEngine.InputSystem.Accelerometer.current;
-
-        if (_gyro == null || _accel == null)
-        {
-            Debug.LogError("[ImuStreamer] Gyroscope or Accelerometer not available. " +
-                           "Check Input System is installed and Active Input Handling is 'Both' or 'Input System'.");
-        }
-        else
-        {
-            InputSystem.EnableDevice(_gyro);
-            InputSystem.EnableDevice(_accel);
-            Debug.Log("[ImuStreamer] Enabled Gyroscope and Accelerometer.");
-        }
-
-        // ---- 2) Connect to laptop TCP server ----
         try
         {
             Debug.Log($"[ImuStreamer] Connecting to {laptopIp}:{port}...");
@@ -80,7 +62,14 @@ public class ImuStreamer : MonoBehaviour
         {
             try
             {
+                // 1) Always send IMU
                 SendImuSample();
+
+                // 2) Also send head pose if we have a transform assigned
+                if (headTransform != null)
+                {
+                    SendPoseSample();
+                }
             }
             catch (Exception e)
             {
@@ -95,29 +84,22 @@ public class ImuStreamer : MonoBehaviour
         Debug.Log("[ImuStreamer] SendLoop stopped.");
     }
 
+    // ---------------- IMU ----------------
+
     private void SendImuSample()
     {
         if (_stream == null || !_stream.CanWrite)
             throw new InvalidOperationException("Stream is not writable.");
 
-        if (_gyro == null || _accel == null || !_gyro.enabled || !_accel.enabled)
-        {
-            // Sensors not ready; skip this frame
-            return;
-        }
-
-        // 1) Read IMU from Input System sensors
-        Vector3 acc = _accel.acceleration.ReadValue();   // m/s^2
-        Vector3 gyro = _gyro.angularVelocity.ReadValue(); // rad/s
+        // 1) Read IMU from Unity
+        Vector3 acc = Input.acceleration;                   // in g
+        Vector3 gyro = Input.gyro.rotationRateUnbiased;     // rad/s
 
         float ax = acc.x, ay = acc.y, az = acc.z;
         float gx = gyro.x, gy = gyro.y, gz = gyro.z;
 
-        // magnetometer still zero for now
+        // No magnetometer via Unity: send zeros for now
         float mx = 0f, my = 0f, mz = 0f;
-
-        // Optional: log to Unity console so you can see the values changing
-        // Debug.Log($"[ImuStreamer] acc={acc}, gyro={gyro}");
 
         // 2) Pack payload: 9 floats big-endian
         WriteFloatBE(_imuPayload, 0, ax);
@@ -133,26 +115,79 @@ public class ImuStreamer : MonoBehaviour
         uint payloadLen = (uint)_imuPayload.Length;
 
         // 3) Header: !BBHQI (big-endian)
-        byte type = 1;        // IMU
+        byte type = 1;        // 1 = IMU
         byte sensorId = 0;    // main IMU
         ushort reserved = 0;
 
         double tSeconds = Time.realtimeSinceStartupAsDouble;
         ulong tNs = (ulong)(tSeconds * 1e9);
 
-        _imuHeader[0] = type;
-        _imuHeader[1] = sensorId;
-        WriteUInt16BE(_imuHeader, 2, reserved);
-        WriteUInt64BE(_imuHeader, 4, tNs);
-        WriteUInt32BE(_imuHeader, 12, payloadLen);
+        _header[0] = type;
+        _header[1] = sensorId;
+        WriteUInt16BE(_header, 2, reserved);
+        WriteUInt64BE(_header, 4, tNs);
+        WriteUInt32BE(_header, 12, payloadLen);
 
         // 4) Send
-        _stream.Write(_imuHeader, 0, _imuHeader.Length);
+        _stream.Write(_header, 0, _header.Length);
         _stream.Write(_imuPayload, 0, _imuPayload.Length);
         _stream.Flush();
     }
 
+    // ---------------- Head pose ----------------
+
+    private void SendPoseSample()
+    {
+        if (_stream == null || !_stream.CanWrite)
+            throw new InvalidOperationException("Stream is not writable.");
+
+        if (headTransform == null)
+        {
+            // Nothing to send
+            return;
+        }
+
+        // 1) Read pose from Unity (world-space)
+        Vector3 pos = headTransform.position;      // meters
+        Quaternion rot = headTransform.rotation;   // world rotation
+
+        float px = pos.x, py = pos.y, pz = pos.z;
+        // Unity quaternions are stored as (x, y, z, w)
+        float qx = rot.x, qy = rot.y, qz = rot.z, qw = rot.w;
+
+        // 2) Pack payload: 7 floats big-endian
+        WriteFloatBE(_posePayload, 0, px);
+        WriteFloatBE(_posePayload, 4, py);
+        WriteFloatBE(_posePayload, 8, pz);
+        WriteFloatBE(_posePayload, 12, qx);
+        WriteFloatBE(_posePayload, 16, qy);
+        WriteFloatBE(_posePayload, 20, qz);
+        WriteFloatBE(_posePayload, 24, qw);
+
+        uint payloadLen = (uint)_posePayload.Length;
+
+        // 3) Header: !BBHQI (big-endian)
+        byte type = 2;        // 2 = head pose
+        byte sensorId = 0;    // main head
+        ushort reserved = 0;
+
+        double tSeconds = Time.realtimeSinceStartupAsDouble;
+        ulong tNs = (ulong)(tSeconds * 1e9);
+
+        _header[0] = type;
+        _header[1] = sensorId;
+        WriteUInt16BE(_header, 2, reserved);
+        WriteUInt64BE(_header, 4, tNs);
+        WriteUInt32BE(_header, 12, payloadLen);
+
+        // 4) Send
+        _stream.Write(_header, 0, _header.Length);
+        _stream.Write(_posePayload, 0, _posePayload.Length);
+        _stream.Flush();
+    }
+
     // ---- helpers ----
+
     private static void WriteUInt16BE(byte[] buffer, int offset, ushort value)
     {
         buffer[offset] = (byte)(value >> 8);
@@ -188,7 +223,13 @@ public class ImuStreamer : MonoBehaviour
 
     void OnApplicationQuit()
     {
-        try { _stream?.Close(); _client?.Close(); }
-        catch { }
+        try
+        {
+            _stream?.Close();
+            _client?.Close();
+        }
+        catch
+        {
+        }
     }
 }

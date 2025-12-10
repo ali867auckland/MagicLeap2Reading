@@ -1,0 +1,24 @@
+# Use LF line endings for all text files
+* text=auto eol=lf
+
+# C# scripts
+*.cs text diff=csharp
+
+# Shell / batch scripts
+*.sh text eol=lf
+*.bash text eol=lf
+*.bat text eol=crlf
+
+# Unity / binary assets (never touch line endings)
+*.unity  binary
+*.prefab binary
+*.asset  binary
+*.mat    binary
+*.fbx    binary
+*.png    binary
+*.jpg    binary
+*.jpeg   binary
+*.tga    binary
+*.psd    binary
+*.dll    binary
+*.exe    binary
