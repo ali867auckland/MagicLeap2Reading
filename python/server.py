@@ -3,7 +3,7 @@ import struct # For packing and unpacking binary data
 from pathlib import Path
 from turtle import write # For file Paths
 
-HOST = "172.24.43.233" 
+HOST = "0.0.0.0" 
 PORT = 5000
  
 ###
