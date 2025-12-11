@@ -3,6 +3,7 @@ using System.Collections;
 using System.Net.Sockets;
 using UnityEngine;
 using UnityEngine.InputSystem;  // NEW: Input System sensors
+using UnityEngine.XR;
 
 public class ImuStreamer : MonoBehaviour
 {
@@ -19,7 +20,8 @@ public class ImuStreamer : MonoBehaviour
     private NetworkStream _stream;
 
     private readonly byte[] _header = new byte[16];     // 16-byte header
-    private readonly byte[] _payload = new byte[9 * 4]; // 9 floats = 36 bytes
+    private readonly byte[] _imuPayload = new byte[9 * 4]; // 9 floats = 36 bytes
+    private readonly byte[] _posePayload = new byte[7 * 4];  // 7 floats
 
     private bool _connected = false;
 
@@ -73,7 +75,8 @@ public class ImuStreamer : MonoBehaviour
         {
             try
             {
-                SendOneSample();
+                SendImuSample();
+                SendHeadPoseSample();
             }
             catch (Exception e)
             {
@@ -88,7 +91,7 @@ public class ImuStreamer : MonoBehaviour
         Debug.Log("[ImuStreamer] SendLoop stopped.");
     }
 
-    private void SendOneSample()
+    private void SendImuSample()
     {
         if (_stream == null || !_stream.CanWrite)
             throw new InvalidOperationException("Stream is not writable.");
@@ -113,17 +116,17 @@ public class ImuStreamer : MonoBehaviour
         // Debug.Log($"[ImuStreamer] acc={acc}, gyro={gyro}");
 
         // 2) Pack payload: 9 floats big-endian
-        WriteFloatBE(_payload, 0, ax);
-        WriteFloatBE(_payload, 4, ay);
-        WriteFloatBE(_payload, 8, az);
-        WriteFloatBE(_payload, 12, gx);
-        WriteFloatBE(_payload, 16, gy);
-        WriteFloatBE(_payload, 20, gz);
-        WriteFloatBE(_payload, 24, mx);
-        WriteFloatBE(_payload, 28, my);
-        WriteFloatBE(_payload, 32, mz);
+        WriteFloatBE(_imuPayload, 0, ax);
+        WriteFloatBE(_imuPayload, 4, ay);
+        WriteFloatBE(_imuPayload, 8, az);
+        WriteFloatBE(_imuPayload, 12, gx);
+        WriteFloatBE(_imuPayload, 16, gy);
+        WriteFloatBE(_imuPayload, 20, gz);
+        WriteFloatBE(_imuPayload, 24, mx);
+        WriteFloatBE(_imuPayload, 28, my);
+        WriteFloatBE(_imuPayload, 32, mz);
 
-        uint payloadLen = (uint)_payload.Length;
+        uint payloadLen = (uint)_imuPayload.Length;
 
         // 3) Header: !BBHQI (big-endian)
         byte type = 1;        // IMU
@@ -141,7 +144,52 @@ public class ImuStreamer : MonoBehaviour
 
         // 4) Send
         _stream.Write(_header, 0, _header.Length);
-        _stream.Write(_payload, 0, _payload.Length);
+        _stream.Write(_imuPayload, 0, _imuPayload.Length);
+        _stream.Flush();
+    }
+
+
+    private void SendHeadPoseSample()
+    {
+        if (_stream == null || !_stream.CanWrite)
+            throw new InvalidOperationException("Stream is not writable.");
+
+        Transform t = Camera.main.transform;
+        Vector3 pos = t.position;
+        Quaternion rot = t.rotation;
+
+        // DEBUG: print pose each packet
+        Debug.Log($"[ImuStreamer] HEADPOSE pos={pos} rot={rot}");
+
+        float px = pos.x, py = pos.y, pz = pos.z;
+        float qx = rot.x, qy = rot.y, qz = rot.z, qw = rot.w;
+
+        // Pack payload: 7 floats big-endian
+        WriteFloatBE(_posePayload, 0, px);
+        WriteFloatBE(_posePayload, 4, py);
+        WriteFloatBE(_posePayload, 8, pz);
+        WriteFloatBE(_posePayload, 12, qx);
+        WriteFloatBE(_posePayload, 16, qy);
+        WriteFloatBE(_posePayload, 20, qz);
+        WriteFloatBE(_posePayload, 24, qw);
+
+        uint payloadLen = (uint)_posePayload.Length;
+
+        byte type = 2;      // HEADPOSE
+        byte sensorId = 0;  // main head pose
+        ushort reserved = 0;
+
+        double tSeconds = Time.realtimeSinceStartupAsDouble;
+        ulong tNs = (ulong)(tSeconds * 1e9);
+
+        _header[0] = type;
+        _header[1] = sensorId;
+        WriteUInt16BE(_header, 2, reserved);
+        WriteUInt64BE(_header, 4, tNs);
+        WriteUInt32BE(_header, 12, payloadLen);
+
+        _stream.Write(_header, 0, _header.Length);
+        _stream.Write(_posePayload, 0, _posePayload.Length);
         _stream.Flush();
     }
 
