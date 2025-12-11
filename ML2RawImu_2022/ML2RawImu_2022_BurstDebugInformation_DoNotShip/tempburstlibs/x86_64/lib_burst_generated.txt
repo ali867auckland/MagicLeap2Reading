@@ -1,4 +1,4 @@
-Library: C:\Users\Zwoax\ML2RawImu_2022\Temp\BurstOutput\tempburstlibs\x86_64\lib_burst_generated
+Library: C:\Users\Zwoax\MagicLeap2Reading\ML2RawImu_2022\Temp\BurstOutput\tempburstlibs\x86_64\lib_burst_generated
 --platform=Android
 --backend=burst-llvm-18
 --target=X64_SSE4
@@ -8,10 +8,10 @@ Library: C:\Users\Zwoax\ML2RawImu_2022\Temp\BurstOutput\tempburstlibs\x86_64\lib
 --float-precision=Standard
 --target-framework=NetFramework
 --generate-link-xml=Temp\burst.link.xml
---temp-folder=C:\Users\Zwoax\ML2RawImu_2022\Temp\Burst
+--temp-folder=C:\Users\Zwoax\MagicLeap2Reading\ML2RawImu_2022\Temp\Burst
 --key-folder=C:/Program Files/Unity/Hub/Editor/2022.3.62f3/Editor/Data/PlaybackEngines/AndroidPlayer
---decode-folder=C:\Users\Zwoax\ML2RawImu_2022\Library\Burst
---output=C:\Users\Zwoax\ML2RawImu_2022\Temp\BurstOutput\tempburstlibs\x86_64\lib_burst_generated
+--decode-folder=C:\Users\Zwoax\MagicLeap2Reading\ML2RawImu_2022\Library\Burst
+--output=C:\Users\Zwoax\MagicLeap2Reading\ML2RawImu_2022\Temp\BurstOutput\tempburstlibs\x86_64\lib_burst_generated
 --pdb-search-paths=Temp/ManagedSymbols/
 
 --method=UnityEngine.XR.Interaction.Toolkit.Utilities.BurstMathUtility, Unity.XR.Interaction.Toolkit, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null::ProjectOnPlane(Unity.Mathematics.float3&, Unity.Mathematics, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null|Unity.Mathematics.float3&, Unity.Mathematics, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null|Unity.Mathematics.float3&, Unity.Mathematics, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null)--1819bc9925667b008fd6c3e6019ccf71

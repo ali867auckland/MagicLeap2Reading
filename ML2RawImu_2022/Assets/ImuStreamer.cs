@@ -1,50 +1,67 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Net.Sockets;
 using UnityEngine;
+using UnityEngine.XR;
 
 public class ImuStreamer : MonoBehaviour
 {
     [Header("Network Settings")]
     [Tooltip("IPv4 address of your laptop running server.py")]
-    public string laptopIp = "172.24.43.233";  // TODO: set to your laptop's IP
-    public int port = 50000;                   // must match PORT in server.py
+    public string laptopIp = "172.24.43.233";
+    public int port = 5000;
 
     [Header("Sampling")]
-    [Tooltip("Seconds between samples (0.05 = 20 Hz)")]
+    [Tooltip("Seconds between samples (0.02 = 50 Hz, 0.05 = 20 Hz)")]
     public float sampleIntervalSeconds = 0.05f;
 
-    [Header("Head Pose")]
-    [Tooltip("Assign the XR Camera / Head transform here")]
-    public Transform headTransform;
-
+    // TCP
     private TcpClient _client;
     private NetworkStream _stream;
+    private bool _connected = false;
 
-    // Common 16-byte header buffer: !BBHQI  (type, sensor_id, reserved, t_ns, payload_len)
+    // Buffers
     private readonly byte[] _header = new byte[16];
-
-    // IMU payload: 9 floats (acc, gyro, mag)
     private readonly byte[] _imuPayload = new byte[9 * 4];
-
-    // Pose payload: 7 floats (pos XYZ, quat XYZW)
     private readonly byte[] _posePayload = new byte[7 * 4];
 
-    private bool _connected = false;
+    // XR devices
+    private InputDevice _headDevice;
+    private bool _headDeviceValid = false;
+    private List<InputDevice> _devices = new List<InputDevice>();
+
+    // Cached head transform
+    private Transform _head;
 
     void Start()
     {
-        Application.runInBackground = true; // keep running if display dims
-        Input.gyro.enabled = true;         // enable Unity gyro
+        Application.runInBackground = true;
 
+        // Get main camera for head pose
+        if (Camera.main != null)
+        {
+            _head = Camera.main.transform;
+            Debug.Log("[ImuStreamer] Using Camera.main as head pose source.");
+        }
+        else
+        {
+            Debug.LogWarning("[ImuStreamer] No Camera.main found!");
+        }
+
+        // Get XR head device for IMU data
+        StartCoroutine(InitializeXRDevice());
+
+        // Connect to server
         try
         {
-            Debug.Log($"[ImuStreamer] Connecting to {laptopIp}:{port}...");
+            Debug.Log($"[ImuStreamer] Connecting to {laptopIp}:{port} ...");
             _client = new TcpClient();
             _client.Connect(laptopIp, port);
             _stream = _client.GetStream();
             _connected = true;
-            Debug.Log("[ImuStreamer] Connected!");
+            Debug.Log("[ImuStreamer] Connected to server.");
+
             StartCoroutine(SendLoop());
         }
         catch (Exception e)
@@ -54,7 +71,52 @@ public class ImuStreamer : MonoBehaviour
         }
     }
 
-    IEnumerator SendLoop()
+    private IEnumerator InitializeXRDevice()
+    {
+        // Wait a bit for XR to initialize
+        yield return new WaitForSeconds(1f);
+
+        // Try to get head device
+        InputDevices.GetDevicesAtXRNode(XRNode.Head, _devices);
+
+        if (_devices.Count > 0)
+        {
+            _headDevice = _devices[0];
+            _headDeviceValid = _headDevice.isValid;
+            Debug.Log($"[ImuStreamer] Found XR head device: {_headDevice.name}");
+            Debug.Log($"[ImuStreamer] Device valid: {_headDeviceValid}");
+
+            // List available features for debugging
+            List<InputFeatureUsage> features = new List<InputFeatureUsage>();
+            if (_headDevice.TryGetFeatureUsages(features))
+            {
+                Debug.Log($"[ImuStreamer] Available features ({features.Count}):");
+                foreach (var feature in features)
+                {
+                    Debug.Log($"  - {feature.name} ({feature.type})");
+                }
+            }
+        }
+        else
+        {
+            Debug.LogWarning("[ImuStreamer] No XR head device found!");
+        }
+
+        // Keep checking for device changes
+        InputDevices.deviceConnected += OnDeviceConnected;
+    }
+
+    private void OnDeviceConnected(InputDevice device)
+    {
+        Debug.Log($"[ImuStreamer] Device connected: {device.name}");
+        if (device.characteristics.HasFlag(InputDeviceCharacteristics.HeadMounted))
+        {
+            _headDevice = device;
+            _headDeviceValid = device.isValid;
+        }
+    }
+
+    private IEnumerator SendLoop()
     {
         var wait = new WaitForSeconds(sampleIntervalSeconds);
 
@@ -62,14 +124,8 @@ public class ImuStreamer : MonoBehaviour
         {
             try
             {
-                // 1) Always send IMU
                 SendImuSample();
-
-                // 2) Also send head pose if we have a transform assigned
-                if (headTransform != null)
-                {
-                    SendPoseSample();
-                }
+                SendPoseSample();
             }
             catch (Exception e)
             {
@@ -84,24 +140,58 @@ public class ImuStreamer : MonoBehaviour
         Debug.Log("[ImuStreamer] SendLoop stopped.");
     }
 
-    // ---------------- IMU ----------------
-
     private void SendImuSample()
     {
         if (_stream == null || !_stream.CanWrite)
             throw new InvalidOperationException("Stream is not writable.");
 
-        // 1) Read IMU from Unity
-        Vector3 acc = Input.acceleration;                   // in g
-        Vector3 gyro = Input.gyro.rotationRateUnbiased;     // rad/s
+        // Try to get IMU data from XR device
+        Vector3 acc = Vector3.zero;
+        Vector3 gyro = Vector3.zero;
+        bool gotData = false;
+
+        if (_headDeviceValid && _headDevice.isValid)
+        {
+            // Try to get acceleration
+            if (_headDevice.TryGetFeatureValue(CommonUsages.deviceAcceleration, out acc))
+            {
+                // Convert from m/s^2 to g
+                acc = acc / 9.81f;
+                gotData = true;
+            }
+
+            // Try to get angular velocity
+            if (_headDevice.TryGetFeatureValue(CommonUsages.deviceAngularVelocity, out gyro))
+            {
+                gotData = true;
+            }
+        }
+
+        // If XR didn't work, try legacy Input as fallback
+        if (!gotData)
+        {
+            if (SystemInfo.supportsAccelerometer)
+            {
+                acc = Input.acceleration;
+            }
+            if (SystemInfo.supportsGyroscope)
+            {
+                Input.gyro.enabled = true;
+                gyro = Input.gyro.rotationRateUnbiased;
+            }
+        }
 
         float ax = acc.x, ay = acc.y, az = acc.z;
         float gx = gyro.x, gy = gyro.y, gz = gyro.z;
+        float mx = 0f, my = 0f, mz = 0f; // No magnetometer
 
-        // No magnetometer via Unity: send zeros for now
-        float mx = 0f, my = 0f, mz = 0f;
+        // Log occasionally for debugging
+        if (Time.frameCount % 100 == 0)
+        {
+            Debug.Log($"[ImuStreamer] acc=({ax:F3},{ay:F3},{az:F3}) gyro=({gx:F3},{gy:F3},{gz:F3})");
+        }
 
-        // 2) Pack payload: 9 floats big-endian
+        // Pack payload
         WriteFloatBE(_imuPayload, 0, ax);
         WriteFloatBE(_imuPayload, 4, ay);
         WriteFloatBE(_imuPayload, 8, az);
@@ -114,13 +204,11 @@ public class ImuStreamer : MonoBehaviour
 
         uint payloadLen = (uint)_imuPayload.Length;
 
-        // 3) Header: !BBHQI (big-endian)
-        byte type = 1;        // 1 = IMU
-        byte sensorId = 0;    // main IMU
+        // Header
+        byte type = 1;
+        byte sensorId = 0;
         ushort reserved = 0;
-
-        double tSeconds = Time.realtimeSinceStartupAsDouble;
-        ulong tNs = (ulong)(tSeconds * 1e9);
+        ulong tNs = (ulong)(Time.realtimeSinceStartupAsDouble * 1e9);
 
         _header[0] = type;
         _header[1] = sensorId;
@@ -128,51 +216,42 @@ public class ImuStreamer : MonoBehaviour
         WriteUInt64BE(_header, 4, tNs);
         WriteUInt32BE(_header, 12, payloadLen);
 
-        // 4) Send
         _stream.Write(_header, 0, _header.Length);
         _stream.Write(_imuPayload, 0, _imuPayload.Length);
         _stream.Flush();
     }
 
-    // ---------------- Head pose ----------------
-
     private void SendPoseSample()
     {
+        if (_head == null)
+            return;
+
         if (_stream == null || !_stream.CanWrite)
             throw new InvalidOperationException("Stream is not writable.");
 
-        if (headTransform == null)
+        // Get actual tracked position and rotation
+        Vector3 pos = _head.position;
+        Quaternion rot = _head.rotation;
+
+        // Log occasionally for debugging
+        if (Time.frameCount % 100 == 0)
         {
-            // Nothing to send
-            return;
+            Debug.Log($"[ImuStreamer] pos=({pos.x:F3},{pos.y:F3},{pos.z:F3}) rot=({rot.x:F3},{rot.y:F3},{rot.z:F3},{rot.w:F3})");
         }
 
-        // 1) Read pose from Unity (world-space)
-        Vector3 pos = headTransform.position;      // meters
-        Quaternion rot = headTransform.rotation;   // world rotation
-
-        float px = pos.x, py = pos.y, pz = pos.z;
-        // Unity quaternions are stored as (x, y, z, w)
-        float qx = rot.x, qy = rot.y, qz = rot.z, qw = rot.w;
-
-        // 2) Pack payload: 7 floats big-endian
-        WriteFloatBE(_posePayload, 0, px);
-        WriteFloatBE(_posePayload, 4, py);
-        WriteFloatBE(_posePayload, 8, pz);
-        WriteFloatBE(_posePayload, 12, qx);
-        WriteFloatBE(_posePayload, 16, qy);
-        WriteFloatBE(_posePayload, 20, qz);
-        WriteFloatBE(_posePayload, 24, qw);
+        WriteFloatBE(_posePayload, 0, pos.x);
+        WriteFloatBE(_posePayload, 4, pos.y);
+        WriteFloatBE(_posePayload, 8, pos.z);
+        WriteFloatBE(_posePayload, 12, rot.x);
+        WriteFloatBE(_posePayload, 16, rot.y);
+        WriteFloatBE(_posePayload, 20, rot.z);
+        WriteFloatBE(_posePayload, 24, rot.w);
 
         uint payloadLen = (uint)_posePayload.Length;
-
-        // 3) Header: !BBHQI (big-endian)
-        byte type = 2;        // 2 = head pose
-        byte sensorId = 0;    // main head
+        byte type = 2;
+        byte sensorId = 0;
         ushort reserved = 0;
-
-        double tSeconds = Time.realtimeSinceStartupAsDouble;
-        ulong tNs = (ulong)(tSeconds * 1e9);
+        ulong tNs = (ulong)(Time.realtimeSinceStartupAsDouble * 1e9);
 
         _header[0] = type;
         _header[1] = sensorId;
@@ -180,14 +259,12 @@ public class ImuStreamer : MonoBehaviour
         WriteUInt64BE(_header, 4, tNs);
         WriteUInt32BE(_header, 12, payloadLen);
 
-        // 4) Send
         _stream.Write(_header, 0, _header.Length);
         _stream.Write(_posePayload, 0, _posePayload.Length);
         _stream.Flush();
     }
 
-    // ---- helpers ----
-
+    // Helper methods
     private static void WriteUInt16BE(byte[] buffer, int offset, ushort value)
     {
         buffer[offset] = (byte)(value >> 8);
@@ -221,15 +298,15 @@ public class ImuStreamer : MonoBehaviour
         Buffer.BlockCopy(tmp, 0, buffer, offset, 4);
     }
 
-    void OnApplicationQuit()
+    void OnDestroy()
     {
+        InputDevices.deviceConnected -= OnDeviceConnected;
+
         try
         {
             _stream?.Close();
             _client?.Close();
         }
-        catch
-        {
-        }
+        catch { }
     }
 }
