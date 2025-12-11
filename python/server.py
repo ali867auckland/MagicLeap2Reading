@@ -1,92 +1,117 @@
 import socket
 import struct
 import csv
-
-HOST = "0.0.0.0"   # listen on all interfaces so the headset can connect
-PORT = 5000
-
-HEADER_FMT = "!BBHQI"      # type, sensor_id, reserved, t_ns, payload_len
-HEADER_SIZE = struct.calcsize(HEADER_FMT)
-
-IMU_FMT = "!9f"            # ax, ay, az, gx, gy, gz, mx, my, mz
-IMU_SIZE = struct.calcsize(IMU_FMT)
-
-POSE_FMT = "!7f"           # px, py, pz, qx, qy, qz, qw
-POSE_SIZE = struct.calcsize(POSE_FMT)
+import os
+from datetime import datetime, timezone
 
 
-def recv_all(conn, n):
-    """Receive exactly n bytes from conn, or None if the connection closes."""
+HOST = "0.0.0.0"   # listen on all interfaces
+PORT = 5000        # must match port in ImuStreamer.cs
+
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+
+OUT_DIR = os.path.join(SCRIPT_DIR, "ML2_readings")
+OUT_FILE = os.path.join(OUT_DIR, "imu.csv")
+
+# Header: !BBHQI  -> type (1), sensorId (1), reserved (2), t_ns (8), payload_len (4)
+HEADER_SIZE = 16
+
+# Payload: 9 floats big-endian -> ax, ay, az, gx, gy, gz, mx, my, mz
+IMU_PAYLOAD_SIZE = 9 * 4  # 9 floats = 36 bytes
+
+
+def read_exact(conn, n: int) -> bytes:
+    """Read exactly n bytes from the socket or raise ConnectionError."""
     data = b""
     while len(data) < n:
         chunk = conn.recv(n - len(data))
         if not chunk:
-            return None
+            raise ConnectionError("Socket closed while reading")
         data += chunk
     return data
 
 
-def main():
-    print(f"Listening on {HOST}:{PORT} ...")
-    server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    server.bind((HOST, PORT))
-    server.listen(1)
+def open_csv():
+    """Open imu.csv for append, create folder + header if needed."""
+    os.makedirs(OUT_DIR, exist_ok=True)
 
-    conn, addr = server.accept()
-    print(f"Connection from {addr}")
+    file_exists = os.path.exists(OUT_FILE)
+    f = open(OUT_FILE, "a", newline="")
+    writer = csv.writer(f)
 
-    imu_file = open("imu.csv", "w", newline="")
-    pose_file = open("pose.csv", "w", newline="")
+    if not file_exists or os.path.getsize(OUT_FILE) == 0:
+        # IMPORTANT: column names match your other scripts
+        writer.writerow([
+            "t_ns",
+            "type",
+            "sensorId",
+            "accx", "accy", "accz",
+            "gyrox", "gyroy", "gyroz",
+            "magx", "magy", "magz",
+            "server_time_iso",
+        ])
+        f.flush()
 
-    imu_writer = csv.writer(imu_file)
-    pose_writer = csv.writer(pose_file)
+    return f, writer
 
-    imu_writer.writerow(
-        ["t_ns", "acc_x", "acc_y", "acc_z", "gyro_x", "gyro_y", "gyro_z",
-         "mag_x", "mag_y", "mag_z"]
-    )
-    pose_writer.writerow(
-        ["t_ns", "pos_x", "pos_y", "pos_z", "quat_x", "quat_y", "quat_z", "quat_w"]
-    )
+
+def handle_client(conn: socket.socket, addr):
+    print(f"[server] Connected from {addr}")
+    f, writer = open_csv()
 
     try:
         while True:
-            header_bytes = recv_all(conn, HEADER_SIZE)
-            if header_bytes is None:
-                print("Connection closed by client.")
-                break
+            # ---- 1) Read and parse 16-byte header ----
+            header = read_exact(conn, HEADER_SIZE)
 
-            typ, sensor_id, reserved, t_ns, payload_len = struct.unpack(
-                HEADER_FMT, header_bytes
-            )
+            type_byte = header[0]
+            sensor_id = header[1]
+            # reserved = struct.unpack("!H", header[2:4])[0]  # not used, but available
+            t_ns = struct.unpack("!Q", header[4:12])[0]
+            payload_len = struct.unpack("!I", header[12:16])[0]
 
-            payload = recv_all(conn, payload_len)
-            if payload is None:
-                print("Connection closed while reading payload.")
-                break
+            if payload_len != IMU_PAYLOAD_SIZE:
+                print(f"[server] Unexpected payload_len={payload_len}, skipping packet")
+                # Still need to consume the payload bytes to keep stream in sync
+                _ = read_exact(conn, payload_len)
+                continue
 
-            if typ == 1 and payload_len == IMU_SIZE:
-                ax, ay, az, gx, gy, gz, mx, my, mz = struct.unpack(IMU_FMT, payload)
-                imu_writer.writerow([t_ns, ax, ay, az, gx, gy, gz, mx, my, mz])
-                imu_file.flush()
-                print(f"IMU  t={t_ns}  acc=({ax:.3f},{ay:.3f},{az:.3f})  "
-                      f"gyro=({gx:.3f},{gy:.3f},{gz:.3f})")
+            # ---- 2) Read IMU payload (9 floats, big-endian) ----
+            payload = read_exact(conn, payload_len)
+            ax, ay, az, gx, gy, gz, mx, my, mz = struct.unpack("!9f", payload)
 
-            elif typ == 2 and payload_len == POSE_SIZE:
-                px, py, pz, qx, qy, qz, qw = struct.unpack(POSE_FMT, payload)
-                pose_writer.writerow([t_ns, px, py, pz, qx, qy, qz, qw])
-                pose_file.flush()
-                print(f"POSE t={t_ns}  pos=({px:.3f},{py:.3f},{pz:.3f})  "
-                      f"quat=({qx:.3f},{qy:.3f},{qz:.3f},{qw:.3f})")
+            # ---- 3) Write one CSV row ----
+            server_time_iso = datetime.now(timezone.utc).isoformat()
 
-            else:
-                print(f"Unknown type {typ} or unexpected payload_len={payload_len}")
+            # Order here matches the header row in open_csv()
+            writer.writerow([
+                t_ns,
+                type_byte,
+                sensor_id,
+                ax, ay, az,         # -> accx, accy, accz
+                gx, gy, gz,         # -> gyrox, gyroy, gyroz
+                mx, my, mz,         # -> magx, magy, magz
+                server_time_iso,
+            ])
+            f.flush()
+    except ConnectionError as e:
+        print(f"[server] Client disconnected: {e}")
     finally:
-        imu_file.close()
-        pose_file.close()
+        f.close()
         conn.close()
-        server.close()
-        print("Connection closed.")
+        print("[server] Connection closed")
+
+
+def main():
+    print(f"[server] Listening on {HOST}:{PORT} ...")
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+        s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+        s.bind((HOST, PORT))
+        s.listen(1)
+
+        while True:
+            conn, addr = s.accept()
+            handle_client(conn, addr)
 
 
 if __name__ == "__main__":
