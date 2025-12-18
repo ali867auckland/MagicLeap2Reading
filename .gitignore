@@ -16,25 +16,44 @@ $RECYCLE.BIN/
 # VS Code / JetBrains
 .vscode/
 .idea/
+*.iml
 
 # Logs
 *.log
 
 ########################
+# Android / Gradle  (IMPORTANT ADDITIONS)
+########################
+
+# Gradle
+.gradle/
+**/build/
+
+# Local SDK / NDK paths (DO NOT COMMIT)
+local.properties
+
+# Android Studio
+.navigation/
+captures/
+.externalNativeBuild/
+.cxx/
+
+# Built outputs
+*.apk
+*.aab
+
+########################
 # Python
 ########################
 
-# Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
 *$py.class
 
-# C extensions
 *.pyd
 *.so
 *.dylib
 
-# Distribution / packaging
 build/
 dist/
 .eggs/
@@ -42,7 +61,6 @@ dist/
 .installed.cfg
 *.egg
 
-# Virtual environments
 .env
 .venv
 env/
@@ -51,7 +69,6 @@ ENV/
 env.bak/
 venv.bak/
 
-# Testing / coverage
 .pytest_cache/
 .coverage
 .coverage.*
@@ -61,10 +78,8 @@ coverage.xml
 *.cover
 .hypothesis/
 
-# Jupyter
 .ipynb_checkpoints/
 
-# Type checking / tooling
 .mypy_cache/
 .pyre/
 .pytype/
@@ -73,7 +88,6 @@ coverage.xml
 # Unity
 ########################
 
-# Core Unity generated folders (anywhere in repo)
 [Ll]ibrary/
 [Tt]emp/
 [Oo]bj/
@@ -82,13 +96,10 @@ coverage.xml
 [Ll]ogs/
 [Mm]emoryCaptures/
 
-# Unity user-specific settings
 UserSettings/
 
-# Crash / debug
 sysinfo.txt
 
-# Unity auto-generated solution/project files
 *.csproj
 *.unityproj
 *.sln
@@ -104,28 +115,20 @@ sysinfo.txt
 *.opendb
 *.VC.db
 
-# Unity Asset Store / packages cache
 *.unitypackage
 
-# Rider / VS cache for Unity
 .vs/
-.idea/
 *.DotSettings.user
 
 ########################
 # Misc
 ########################
 
-# Backup files
 *~
 *.swp
 *.swo
 
-# Python / data experiments
 *.pickle
 *.pkl
 *.npz
 *.npy
-
-# Ignore built APKs
-*.apk
