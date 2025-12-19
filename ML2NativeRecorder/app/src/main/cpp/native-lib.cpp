@@ -2,13 +2,12 @@
 #include <android/log.h>
 #include <mutex>
 
-// ---- Magic Leap headers (requires MLSDK_ROOT include path in CMake) ----
 #include "ml_perception.h"
 #include "ml_head_tracking.h"
 #include "ml_snapshot.h"
 #include "ml_time.h"
 
-#define LOGI(...) __android_log_print(ANDROID_LOG_INFO, "native-lib", __VA_ARGS__)
+#define LOGI(...) __android_log_print(ANDROID_LOG_INFO,  "native-lib", __VA_ARGS__)
 #define LOGE(...) __android_log_print(ANDROID_LOG_ERROR, "native-lib", __VA_ARGS__)
 
 static std::mutex g_mu;
@@ -16,14 +15,22 @@ static bool g_ready = false;
 static MLHandle g_head = ML_INVALID_HANDLE;
 static MLCoordinateFrameUID g_head_cf{};
 
-// ------------------ MainActivity JNI (your existing one) ------------------
+static void LogML(const char* what, MLResult r) {
+    if (r == MLResult_Ok) {
+        LOGI("%s OK", what);
+    } else {
+        // Perception module provides this string helper:
+        // MLSnapshotGetResultString(result_code) :contentReference[oaicite:2]{index=2}
+        LOGE("%s failed: r=%d (%s)", what, (int)r, MLSnapshotGetResultString(r));
+    }
+}
+
 extern "C"
 JNIEXPORT jstring JNICALL
 Java_com_example_ml2nativerecorder_MainActivity_stringFromJNI(JNIEnv* env, jobject) {
     return env->NewStringUTF("Hello from native C++");
 }
 
-// ------------------ Recorder JNI (new) ------------------
 extern "C"
 JNIEXPORT jboolean JNICALL
 Java_com_example_ml2nativerecorder_Recorder_nativeInit(JNIEnv*, jobject) {
@@ -31,25 +38,23 @@ Java_com_example_ml2nativerecorder_Recorder_nativeInit(JNIEnv*, jobject) {
     if (g_ready) return JNI_TRUE;
 
     MLPerceptionSettings s{};
-    if (MLPerceptionInitSettings(&s) != MLResult_Ok) {
-        LOGE("MLPerceptionInitSettings failed");
-        return JNI_FALSE;
-    }
-    if (MLPerceptionStartup(&s) != MLResult_Ok) {
-        LOGE("MLPerceptionStartup failed");
-        return JNI_FALSE;
-    }
+    MLResult r = MLPerceptionInitSettings(&s);
+    LogML("MLPerceptionInitSettings", r);
+    if (r != MLResult_Ok) return JNI_FALSE;
 
-    if (MLHeadTrackingCreate(&g_head) != MLResult_Ok || g_head == ML_INVALID_HANDLE) {
-        LOGE("MLHeadTrackingCreate failed");
-        return JNI_FALSE;
-    }
+    r = MLPerceptionStartup(&s);
+    LogML("MLPerceptionStartup", r);
+    if (r != MLResult_Ok) return JNI_FALSE;
+
+    r = MLHeadTrackingCreate(&g_head);
+    LogML("MLHeadTrackingCreate", r);
+    if (r != MLResult_Ok || g_head == ML_INVALID_HANDLE) return JNI_FALSE;
 
     MLHeadTrackingStaticData sd{};
-    if (MLHeadTrackingGetStaticData(g_head, &sd) != MLResult_Ok) {
-        LOGE("MLHeadTrackingGetStaticData failed");
-        return JNI_FALSE;
-    }
+    r = MLHeadTrackingGetStaticData(g_head, &sd);
+    LogML("MLHeadTrackingGetStaticData", r);
+    if (r != MLResult_Ok) return JNI_FALSE;
+
     g_head_cf = sd.coord_frame_head;
 
     g_ready = true;
@@ -67,7 +72,9 @@ Java_com_example_ml2nativerecorder_Recorder_nativeShutdown(JNIEnv*, jobject) {
         MLHeadTrackingDestroy(g_head);
         g_head = ML_INVALID_HANDLE;
     }
-    MLPerceptionShutdown();
+    MLResult r = MLPerceptionShutdown();
+    LogML("MLPerceptionShutdown", r);
+
     g_ready = false;
     LOGI("nativeShutdown OK");
 }
@@ -88,6 +95,7 @@ Java_com_example_ml2nativerecorder_Recorder_nativePoseAtMLTime(JNIEnv* env, jobj
     MLSnapshot* snap = nullptr;
     MLResult r = MLPerceptionGetPredictedSnapshot((MLTime)ml_time, &snap);
     if (r != MLResult_Ok || !snap) {
+        LogML("MLPerceptionGetPredictedSnapshot", r);
         env->SetFloatArrayRegion(out, 0, 16, buf);
         return out;
     }
@@ -98,6 +106,7 @@ Java_com_example_ml2nativerecorder_Recorder_nativePoseAtMLTime(JNIEnv* env, jobj
     MLPerceptionReleaseSnapshot(snap);
 
     if (r != MLResult_Ok) {
+        LogML("MLSnapshotGetTransformWithDerivatives", r);
         env->SetFloatArrayRegion(out, 0, 16, buf);
         return out;
     }
@@ -117,7 +126,7 @@ Java_com_example_ml2nativerecorder_Recorder_nativePoseAtMLTime(JNIEnv* env, jobj
     buf[11] = d.angular_velocity_r_s.y;
     buf[12] = d.angular_velocity_r_s.z;
 
-    buf[13] = 1.0f; // confidence placeholder
+    buf[13] = 1.0f; // placeholder
 
     env->SetFloatArrayRegion(out, 0, 16, buf);
     return out;

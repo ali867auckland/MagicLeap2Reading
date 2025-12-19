@@ -10,8 +10,8 @@ android {
 
     defaultConfig {
         applicationId = "com.example.ml2nativerecorder"
-        minSdk = 33
-        targetSdk = 34
+        minSdk = 29
+        targetSdk = 30
         versionCode = 1
         versionName = "1.0"
 
